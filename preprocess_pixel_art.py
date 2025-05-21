@@ -19,6 +19,7 @@ all_images = [f for f in os.listdir(DATASET_FOLDER) if f.endswith(".png")]
 SUBSET_SIZE = min(SUBSET_SIZE, len(all_images))
 subset_images = random.sample(all_images, SUBSET_SIZE)  # Select images randomly
 
+
 # Save subset file names for reference
 with open("subset_images.txt", "w") as f:
     for img in subset_images:
@@ -118,6 +119,6 @@ fine_tuned_pipe = StableDiffusionPipeline.from_pretrained(
     model_id, unet=UNet2DConditionModel.from_pretrained("./fine_tuned_pixel_art_model/unet")
 ).to("cuda")
 
-prompt = "8-bit warrior with sword"
+prompt = "32-bit warrior with sword"
 image = fine_tuned_pipe(prompt).images[0]
 image.show()
