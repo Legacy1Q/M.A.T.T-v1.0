@@ -1,7 +1,7 @@
 import os
 import torch
 import torch.nn as nn
-from diffusers import StableDiffusionPipeline, UNet2DConditionModel, AutoencoderKL
+from diffusers import StableDiffusionPipeline, UNet2DConditionModel, AutoencoderKL, DPMSolverMultistepScheduler
 from transformers import CLIPTextModel, CLIPTokenizer
 from torch.utils.data import DataLoader
 from preprocess_pixel_art import train_dataset  # 🔹 NEW: Import dataset from preprocessing script
@@ -26,6 +26,9 @@ optimizer = torch.optim.AdamW(unet.parameters(), lr=learning_rate)
 # 🔹 CLIP text encoder projection
 embed_dim = text_encoder.config.hidden_size
 text_proj = nn.Linear(embed_dim, 320).to("cuda")
+
+# 🔹 Swapping out Scheduler
+pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
 
 # 🔹 Training Loop
 for epoch in range(epochs):
