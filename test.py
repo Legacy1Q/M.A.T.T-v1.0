@@ -17,7 +17,7 @@ fine_tuned_pipe = StableDiffusionPipeline.from_pretrained(
 ).to("cuda")
 
 # ✅ Generate an image
-prompt = "dragon hybrid"
+prompt = "2D 32-Bit bullet"
 generated_image = fine_tuned_pipe(prompt).images[0]
 
 # ✅ Save the original image (with background)
@@ -33,7 +33,7 @@ with Image.open(original_path) as img:
 # ✅ (Optional) Copy transparent image to Unity project
 shutil.copy(
     transparent_path,
-    "C:/Users/mdsim/Poetry Glass/Assets/GeneratedImages/my_sprite.png"
+    "C:/Users/mdsim/Delivery Driver/Assets/GeneratedImages/my_sprite.png"
 )
 
 # ✅ (Optional) Preview
